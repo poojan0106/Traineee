@@ -1,0 +1,18 @@
+<apex:page controller="NewLoginController" >
+    <apex:form >
+      <center><div style="width:400px ; margin-top:16%; background: #ABBAEA;" >
+    <apex:pageBlock title="Login Page">
+        <h1 style=" margin-right:15%; padding:5px; width:100px; background: yellow;padding-bottom:4px;"> Login Page </h1>
+      <apex:pageBlockSection columns="1">
+      <apex:pageMessages id="error"/>
+        <apex:inputText label="Username" value="{!login.Name}" required="true" />
+        <apex:inputSecret label="Password" value="{!login.Password__c}" required="true" />
+      </apex:pageBlockSection>
+      <apex:pageBlockButtons location="bottom">
+        <apex:commandButton value="Login"  action="{!login}" reRender="Error"/>
+      </apex:pageBlockButtons>
+    </apex:pageBlock>
+    </div>
+    </center>
+   </apex:form>
+</apex:page>

@@ -1,0 +1,7 @@
+<aura:event type="APPLICATION" description="Event template" >
+     <aura:attribute name="draggedItem" type="Object" />
+    <aura:attribute name="targetSectionId" type="String" />
+    <aura:attribute name="dragId" type="String" />
+    <aura:attribute name="dropId" type="String" />
+    <aura:attribute name="droppedItem" type="Object" />
+</aura:event>

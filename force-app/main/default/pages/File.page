@@ -1,0 +1,10 @@
+<apex:page showHeader="false" >
+<apex:stylesheet value="{!$Resource.File}"/>
+<h1>Welcome to My Webpage </h1>
+<p>
+This website contains some information about salesforce.
+</p>
+<apex:outputText styleClass="sales">
+MyWebpage
+</apex:outputText>
+</apex:page>

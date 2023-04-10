@@ -1,0 +1,24 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="imageURL" type="String" access="global" />
+    <aura:attribute name="description" type="String" access="global"/>
+    <aura:attribute name="fontSize" type="Integer" default="16" access="global" />
+    <aura:attribute name="fontColor" type="string" default="#000000" access="global" />
+    <aura:attribute name="bgColor" type="string" default="#111111"  access="global"/>
+    
+    <lightning:card title="Image Display with Description">
+        <div class="slds-p-around_medium">
+            <lightning:input type="String" label="Image URL" aura:id="Img"  value="{!v.imageURL}" onchange="{!c.displayImage}"  />
+            <lightning:input type="Integer" label="Font Size" value="{!v.fontSize}" aura:id="fontSize" onchange="{!c.displayImage}"/>
+            <lightning:input type="String" label=" Enter Font Color In Hex Code" value="{!v.fontColor}" aura:id="fontColor" onchange="{!c.displayImage}" />
+            <lightning:input type="String" label="Enter Description Background Color In Hax Code" value="{!v.bgColor}" aura:id="bgColor" onchange="{!c.displayImage}"/>
+            <lightning:input type="String" label="Description" value="{!v.description}" aura:id="description" onchange="{!c.displayImage}" />
+        </div>
+       
+    </lightning:card>
+    
+    <div>
+         <p style="{!'font-size: ' + v.fontSize + 'px; background-color:' + v.bgColor + '; color: ' + v.fontColor + ';'}">{!v.description}</p>
+        </div><br/>
+         <div>
+            <img class="image-container" src="{!v.imageURL}" alt="{!v.description}"/></div><br/> 
+</aura:component>

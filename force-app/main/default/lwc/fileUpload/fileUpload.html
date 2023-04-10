@@ -1,0 +1,58 @@
+<template>
+    <lightning-card title="Choose file to upload" style="padding-left:15%">
+    <input type="file" onchange={handleUploadImage}  accept="image/*" style="padding-left:35%" multiple/>
+</lightning-card>
+<lightning-card title="show uploaded file">
+    <c-file-upload-preview uploaded-image-file={uploadedImageFile}></c-file-upload-preview>
+</lightning-card>
+  </template>
+
+
+
+
+ 
+<!-- <template>
+    <lightning-card title="Upload Image Here">
+        <lightning-file-upload 
+            type="file"
+            label="Upload Image"
+            accept=".jpg,.jpeg,.png"
+            onchange={handleUploadFinished}>
+        </lightning-file-upload>
+    </lightning-card>
+    <c-file-upload-preview image-url={imageUrl}></c-file-upload-preview>
+</template> -->
+
+
+
+
+<!-- <template>
+    <lightning-card title="Upload Image">
+       <lightning-input
+       type="file" 
+       accept=".jpg, .jpeg, .png" 
+       record-id={recordId} 
+       label="Upload Image" 
+       onchange={handleFileChange}
+       multiple
+       ></lightning-input>
+       <c-file-upload-preview image-url={imageUrl} ></c-file-upload-preview>
+   </lightning-card>
+   </template> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- https://www.salesforcecodecrack.com/2019/06/custom-file-upload-in-lightning-web.html -->

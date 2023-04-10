@@ -1,0 +1,206 @@
+<aura:component controller="Demo3"
+    implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+    access="global">
+    <aura:attribute name="PageHeading" type="String" default="Account and Related Contacts" />
+    <aura:attribute name="accData1" type="List" />
+    <aura:attribute name="dragId" type="String" />
+    <aura:attribute name="dropId" type="String" />
+    <aura:attribute name="accData2" type="List" />
+    <aura:attribute name="Search1" type="String" default="Enter Account Name For Section 1:-  " />
+    <aura:attribute name="Search2" type="String" default="Enter Account Name For Section 2 :-  " />
+    <aura:attribute name="conData1" type="List" />
+    <aura:attribute name="conData2" type="List" />
+    <aura:attribute name="dropItem" type="Object" />
+    <aura:attribute name="show1" type="boolean" default="false" />
+    <aura:attribute name="show2" type="boolean" default="false" />
+
+
+    <aura:handler name="init" value="{!this}" action="{!c.doinit}" />
+
+    <div class=" slds-page-header slds-text-heading--large slds-align--absolute-center">
+        {!v.PageHeading}
+    </div>
+    <div class="slds-grid slds-gutters">
+        <div class="slds-col">
+            <lightning:input type="text" name="searchKey1" label="Enter Account Name" aura:id="searchKey1"
+                onchange="{!c.searchKeyChange1}" placeholder="Search Account Name In Section 1" />
+            <div class="slds-section slds-is-open">
+                <h3 class="slds-section__title slds-theme_shade">
+                    <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Account Section 1</span>
+                </h3>
+                <br />
+                <table
+                    class="slds-table slds-table--bordered slds-table--striped slds-table--cell-buffer slds-table--fixed-layout">
+                    <thead>
+                        <tr class="slds-text-heading--label">
+                            <th scope="col">
+                                <div class="slds-truncate" title="Account Name">Account Name</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Phone">Phone</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Type">Type</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <aura:iteration items="{!v.accData1}" var="row" indexVar="index">
+
+                            <tr>
+                                <th scope="row">
+                                    <div class="slds-truncate" data-id="{!row.Id}">
+                                        <a data-id="{!row.Id}" ondragover="{!c.handleDragOver}"
+                                            ondrop="{!c.handleDrop1}" onclick="{!c.showCon1}" value="{!row}"
+                                            data-index="{!index}">{!row.Name} </a>
+                                    </div>
+                                </th>
+                                <td>
+                                    <div class="slds-truncate" title="{!row.Phone}">{!row.Phone}</div>
+                                </td>
+                                <td>
+                                    <div class="slds-truncate" title="{!row.Type}">{!row.Type}</div>
+                                </td>
+                            </tr>
+
+                        </aura:iteration>
+                    </tbody>
+                </table>
+            </div>
+            <br />
+            <aura:if isTrue="{!v.show1}">
+                <div class="slds-section slds-is-open">
+                    <h3 class="slds-section__title slds-theme_shade">
+                        <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Related Contact
+                            Details</span>
+                    </h3>
+                    <br />
+                    <table
+                        class="slds-table slds-table--bordered slds-table--striped slds-table--cell-buffer slds-table--fixed-layout">
+                        <thead>
+                            <tr class="slds-text-heading--label">
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Contact Name">Contact Name</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Account Id">Account Id</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Email">Email</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <aura:iteration items="{!v.conData1}" var="row">
+
+                                <tr draggable="true" ondragstart="{!c.handleDragStart}" data-drag-id="{!row.Id}">
+                                    <th scope="row">
+                                        <div class="slds-truncate" title="{!row.Name}">{!row.Name}</div>
+                                    </th>
+                                    <td>
+                                        <div class="slds-truncate" title="{!row.AccountId}">{!row.AccountId}</div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" title="{!row.Email}">{!row.Email}</div>
+                                    </td>
+
+                                </tr>
+                            </aura:iteration>
+                        </tbody>
+                    </table>
+                </div>
+            </aura:if>
+        </div>
+        <div class="slds-col">
+
+            <lightning:input type="text" name="searchKey2" label="Enter Account Name" aura:id="searchKey2"
+                onchange="{!c.searchKeyChange2}" placeholder="Search Account Name In Section 2" />
+            <div class="slds-section slds-is-open">
+                <h3 class="slds-section__title slds-theme_shade">
+                    <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Account section 2</span>
+                </h3>
+                <br />
+                <table
+                    class="slds-table slds-table--bordered slds-table--striped slds-table--cell-buffer slds-table--fixed-layout">
+                    <thead>
+                        <tr class="slds-text-heading--label">
+                            <th scope="col">
+                                <div class="slds-truncate" title="Account Name">Account Name</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Phone">Phone</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Type">Type</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <aura:iteration items="{!v.accData2}" var="row" indexVar="index">
+                            <tr>
+                                <th scope="row">
+                                    <div class="slds-truncate" data-id="{!row.Id}">
+                                        <a ondragover="{!c.handleDragOver}" ondrop="{!c.handleDrop}" data-id="{!row.Id}"
+                                            onclick="{!c.showCon2}" value="{!row}" data-index="{!index}">{!row.Name}
+                                        </a>
+                                    </div>
+                                </th>
+                                <td>
+                                    <div class="slds-truncate" title="{!row.Phone}">{!row.Phone}</div>
+                                </td>
+                                <td>
+                                    <div class="slds-truncate" title="{!row.Type}">{!row.Type}</div>
+                                </td>
+                            </tr>
+
+                        </aura:iteration>
+                    </tbody>
+                </table>
+            </div>
+
+            <br />
+            <aura:if isTrue="{!v.show2}">
+                <div class="slds-section slds-is-open">
+                    <h3 class="slds-section__title slds-theme_shade">
+                        <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Related Contact
+                            Details</span>
+                    </h3>
+                    <br />
+                    <table
+                        class="slds-table slds-table--bordered slds-table--striped slds-table--cell-buffer slds-table--fixed-layout">
+                        <thead>
+                            <tr class="slds-text-heading--label">
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Contact Name">Contact Name</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Account Id">Account Id</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Email">Email</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <aura:iteration items="{!v.conData2}" var="row">
+
+                                <tr draggable="true" ondragstart="{!c.handleDragStart}" data-drag-id="{!row.Id}">
+
+                                    <th scope="row">
+                                        <div class="slds-truncate" title="{!row.Name}">{!row.Name}</div>
+                                    </th>
+                                    <td>
+                                        <div class="slds-truncate" title="{!row.AccountId}">{!row.AccountId}</div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" title="{!row.Email}">{!row.Email}</div>
+                                    </td>
+                                </tr>
+                            </aura:iteration>
+                        </tbody>
+                    </table>
+                </div>
+            </aura:if>
+        </div>
+    </div>
+</aura:component>

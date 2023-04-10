@@ -1,0 +1,93 @@
+<aura:component controller="contactRelatedToAccount" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+ 
+    <aura:attribute name="PageHeading" type="String" default="Account and Related Contacts" />
+    <aura:attribute name="accData" type="List"/>
+    <aura:attribute name="Search" type="String" default="Enter Account Name :-  "/> 
+    <aura:attribute name="conData" type="List"/>
+    <aura:attribute name="show" type="boolean" default="false"/>
+    <aura:attribute name="paginationList" type="List"/>
+	<aura:attribute name="pageSize" type="Integer" default="5"/>
+	<aura:attribute name="totalSize" type="Integer"/>
+	<aura:attribute name="start" type="Integer" />
+	<aura:attribute name="end" type="Integer"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doinit}" />
+    <lightning:input type="text" name="searchKey" label="Enter Account Name" aura:id="searchKey" onchange="{!c.searchKeyChange}" placeholder="Search" />
+    <div class=" slds-page-header slds-text-heading--large slds-align--absolute-center">       
+        {!v.PageHeading}              
+    </div>
+    <div class="slds-section slds-is-open">
+        <h3 class="slds-section__title slds-theme_shade">
+            <span class="slds-truncate slds-p-horizontal_small slds-align_absolute-center" title="Section Title">Accounts</span>
+        </h3>
+        <br/>
+      
+    <table >
+		<tr> <td style="width:3%">Show:-  </td><td style="width:1%">
+        <ui:inputSelect aura:id="records" change="{!c.OnSelectChange}">
+		<ui:inputSelectOption text="5" value="5"/>
+		<ui:inputSelectOption text="10" value="10"/>
+		<ui:inputSelectOption text="20" value="20"/>
+		<ui:inputSelectOption text="30" value="30"/>
+		</ui:inputSelect></td><td>Entries</td>
+		</tr>
+    </table><br/>
+        
+        
+        <table class="slds-table slds-table--bordered slds-table--striped slds-table--cell-buffer slds-table--fixed-layout">
+            <thead>
+                <tr class="slds-text-heading--label">
+                    <th scope="col"><div class="slds-truncate" title="Account Name">Account Name</div></th>
+                    <th scope="col"><div class="slds-truncate" title="Phone">Phone</div></th>
+                    <th scope="col"><div class="slds-truncate" title="Type">Type</div></th>
+                </tr>
+            </thead>
+            <tbody>
+                <aura:iteration items="{!v.paginationList}" var="row" indexVar="index">
+                    <tr>
+                        <th scope="row">
+                            <div class="slds-truncate" >
+                                <a onclick="{!c.showCon}" value="{!row}" data-index="{!index}">{!row.Name} </a>
+                            </div>
+                        </th>
+                        <td><div class="slds-truncate" title="{!row.Phone}">{!row.Phone}</div></td>
+                        <td><div class="slds-truncate" title="{!row.Type}">{!row.Type}</div></td>
+                    </tr>
+                </aura:iteration>
+                	<lightning:button label="First" disabled="{!v.start == 0}" onclick="{!c.first}" />
+					<lightning:button label="Previous" disabled="{!v.start == 0 || v.pageSize >= v.totalSize}" onclick="{!c.previous}" />
+					<lightning:button label="Next" disabled="{!v.end >= v.totalSize || v.pageSize >= v.totalSize}" onclick="{!c.next}" />
+					<lightning:button label="Last" disabled="{!v.end >= v.totalSize}" onclick="{!c.last}" />
+
+            </tbody>
+        </table>
+    </div>
+    <br/>
+    <aura:if isTrue="{!v.show}">
+        <div class="slds-section slds-is-open">
+            <h3 class="slds-section__title slds-theme_shade">
+                <span class="slds-truncate slds-p-horizontal_small slds-align_absolute-center" title="Section Title">Related Contact Details</span>
+            </h3>
+            <br/>
+            <table class="slds-table slds-table--bordered slds-table--striped slds-table--cell-buffer slds-table--fixed-layout">
+                <thead>
+                    <tr class="slds-text-heading--label">
+                        <th scope="col"><div class="slds-truncate" title="Contact Name">Contact Name</div></th>
+                        <th scope="col"><div class="slds-truncate" title="Phone">Phone</div></th>
+                        <th scope="col"><div class="slds-truncate" title="Email">Email</div></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <aura:iteration items="{!v.conData}" var="row2">
+                        <tr>
+                            <th scope="row"><div class="slds-truncate" title="{!row2.Name}">{!row2.Name}</div></th>
+                            <td><div class="slds-truncate" title="{!row2.Phone}">{!row2.Phone}</div></td>
+                            <td><div class="slds-truncate" title="{!row2.Email}">{!row2.Emau}</div></td>
+                        </tr>
+                    </aura:iteration>
+                </tbody>
+            </table>
+        </div>
+    </aura:if>
+
+</aura:component>

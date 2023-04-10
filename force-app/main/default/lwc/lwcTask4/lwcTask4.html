@@ -1,0 +1,102 @@
+<template>
+    <lightning-progress-indicator current-step={currentStep} type="path" variant="base">
+        <lightning-progress-step label="Step 1" value="1" onclick={handleOnStepClick}></lightning-progress-step>
+        <lightning-progress-step label="Step 2" value="2" onclick={handleOnStepClick}></lightning-progress-step>
+        <lightning-progress-step label="Step 3" value="3" onclick={handleOnStepClick}></lightning-progress-step>
+    </lightning-progress-indicator>
+     <br/>
+     <b style="font-size:17px; text-align:center;padding-left:40%; ">Lwc Wizard Task</b><br/>
+    <template if:true={isStepOne}>
+        <lightning-card>
+        <div class="slds-p-horizontal_small">
+            <b style="font-size:14px; text-align:center;padding-left:40%; ">Object And OBjects Record Page</b>
+            <lightning-combobox
+                name="Select Object Which Record You Want To Show :"
+                label="Select Object Which Record You Want To Show : "
+                placeholder="Select Object"
+                value={value}
+                onchange={handleOnSelect}
+                options={options}>
+            </lightning-combobox>
+            <br/>
+            <!-- <lightning-button variant="brand"
+                label="Selected Record"
+                title="Selected"
+                slot="actions"
+                onclick={getSelected}
+                icon-name="utility:check" 
+                style="float: center;">
+            </lightning-button><br/> -->
+            <template if:true={Account}>
+            <div style="height: 350px;">
+                <lightning-datatable
+                        key-field="accId"
+                        data={accData}
+                        columns={accCol}
+                        
+                        onrowselection={hendle}
+                        >
+                </lightning-datatable>
+            </div>
+            </template>
+            <template if:true={Contact}>
+            <div style="height: 300px;">
+                <lightning-datatable
+                        key-field="conId"
+                        data={conData}
+                        columns={conCol}
+                        onrowselection={hendle}
+                        >
+                </lightning-datatable>
+            </div>
+            </template>
+            <template if:true={Lead}>
+            <div style="height: 300px;">
+                <lightning-datatable
+                        key-field="leadId"
+                        data={leadData}
+                        columns={leadCol}
+                        onrowselection={hendle}
+                        >
+                </lightning-datatable>
+            </div>
+            </template>
+        </div>
+    </lightning-card>
+    <br/>
+    </template>
+    <template if:true={isStepTwo}>
+       <lightning-card>
+        <b style="font-size:14px; text-align:center;padding-left:40%; ">Draft Email Page</b><br/>
+        <!-- <lightning-input type="email" label="From :" value="poojangabani1234@gmail.com" ></lightning-input> -->
+        <!-- <lightning-input type="email" label="To :" value={s} id="To"></lightning-input> -->
+        <lightning-input type="text" label="Subject :" onchange={mail}></lightning-input>
+        <lightning-textarea  label="Email body :" onchange={mail1}></lightning-textarea>
+        <lightning-formatted-rich-text value={Body}></lightning-formatted-rich-text>
+       </lightning-card>
+        <br/>
+    </template>
+    <template if:true={isStepThree}>
+        <lightning-card>
+            <b style="font-size:14px; text-align:center;padding-left:40%; ">Preview And Send Email Page </b>
+            <div class="slds-p-left_medium">
+            <p>Subject : {Subject}</p>
+           <pre><p>Email Body : {Body}</p></pre>
+            <br/>
+            <lightning-button variant="brand" onclick={sendEmailToController} label="Send Email"></lightning-button>
+            </div>
+        </lightning-card>
+        <br/>
+    </template>
+     
+    <template if:true={isEnablePrev}>
+        <lightning-button variant="brand" label="previous" onclick={handlePrev}></lightning-button>
+    </template>&nbsp;&nbsp;
+     
+    <template if:true={isEnableNext}>
+        <lightning-button label="Next" variant="brand" onclick={handleNext}></lightning-button>
+    </template>
+    <template if:true={isEnableFinish}>
+        <lightning-button label="Finish" variant="brand" onclick={handleFinish}></lightning-button>
+    </template>
+</template>

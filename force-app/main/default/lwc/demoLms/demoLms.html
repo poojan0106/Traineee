@@ -1,0 +1,20 @@
+<template>
+    <lightning-card title="Lightning Message Service (LMS) in LWC Publisher" icon-name="standard:contact">
+        <div class="slds-p-horizontal_small">
+            <lightning-combobox
+            name="Accounts"
+            label=" Select Account"
+            placeholder="Choose Account"
+            value={value}
+            onchange={handleChange}
+            options={statusOptions}>
+        </lightning-combobox>
+            <!-- <lightning-input type="text" label="Message" onchange={handleChange} value={message}></lightning-input> -->
+            <!-- call subscriber -->
+            <div class="slds-p-around_medium lgc-bg" style="text-align: end;">
+                <lightning-button label="Send Message" variant="brand" onclick={handleClick}></lightning-button>
+            </div>    
+        </div>
+     
+    </lightning-card>
+</template>

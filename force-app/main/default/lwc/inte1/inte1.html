@@ -1,0 +1,7 @@
+<template>
+    <lightning-button label="Draft Email" onclick={handleDraftEmail}></lightning-button>
+    <template if:true={showEmailPopup}>
+        <c-integration-task1 subject={subject} record-id={a} body={body} onclose={handleEmailPopupClose}></c-integration-task1>
+    </template>
+</template>
+<!-- attachment={attachment} -->

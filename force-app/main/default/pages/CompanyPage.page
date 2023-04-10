@@ -1,0 +1,9 @@
+<apex:page >
+    <apex:pageBlock >
+        <apex:pageBlockSection >
+            <apex:outputText >
+              <h1 style="color:Red; font-size:15px;"> {!$Label.CompanyLabel}</h1>
+            </apex:outputText>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:page>

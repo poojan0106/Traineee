@@ -1,0 +1,8 @@
+<design:component label="Custom Banner Component">
+    <design:attribute name="imageURL" label="Image URL" description="Enter the image URL here." />
+    <design:attribute name="bgColor"  label="Background Color" description="Enter the background color here." />
+    <design:attribute name="description" label="Description" description="Enter the description here." />
+    <design:attribute name="fontSize"  label="Font Size" description="Enter the font size here." />
+    <design:attribute name="fontColor" label="Font Color" description="Enter the font color here." />
+    
+</design:component>

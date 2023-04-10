@@ -1,0 +1,18 @@
+<apex:page controller="Regst" >
+    <apex:form >
+      <center><div style="width:400px ; margin-top:16%; background: #769922;" >
+    <apex:pageBlock title="Login Page">
+        <h1 style=" margin-right:15%; padding:5px; width:100px; background: rgb(10, 74, 151);padding-bottom:4px;"> Registration Page </h1>
+      <apex:pageBlockSection columns="1">
+        <apex:inputText label="Name"  required="true" />
+        <apex:inputText label="emailid"  required="true" />
+        <apex:inputText label="Password"  required="true" />
+      </apex:pageBlockSection>
+      <apex:pageBlockButtons location="bottom">
+        <apex:commandButton value="Register" action="{!Registration}" reRender="Error"/>
+      </apex:pageBlockButtons>
+    </apex:pageBlock>
+    </div>
+    </center>
+   </apex:form>
+</apex:page>

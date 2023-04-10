@@ -1,0 +1,33 @@
+<template>
+    <lightning-card title="Lightning Message Service (LMS) in LWC Subscriber" icon-name="standard:account">
+        <div class="slds-m-around_medium">
+            {publisherMessage}
+        </div>
+    
+
+    <lightning-card title=" Selected Account Releted Contact" icon-name="standard:contact_list">
+     <div class="slds-p-horizontal_small">
+        <lightning-combobox
+        name="Contacts"
+        label=" Selected Account Contacts List"
+        placeholder="Selected Account Contacts"
+        value={value}
+        options={statusOptions}>
+    </lightning-combobox>
+    </div>
+</lightning-card>
+
+
+    <lightning-card title=" Selected Account Releted Opportunity" icon-name="standard:opportunity">
+        <div class="slds-p-horizontal_small">
+            <lightning-combobox
+            name="Opportunity"
+            label=" Selected Account Opportunity List"
+            placeholder="Selected Account Opportunity"
+            value={values}
+            options={statusOption}>
+        </lightning-combobox>
+        </div>
+    </lightning-card>
+</lightning-card>
+</template>

@@ -1,4 +1,29 @@
 public class integration2 {
+
+    private static String getMimeType(String fileType) {
+        String mimeType = "";
+        switch (fileType) {
+            case "jpg":
+            case "jpeg":
+            case "png":
+            case "gif":
+                mimeType = "image/" + fileType;
+                break;
+            case "pdf":
+                mimeType = "application/pdf";
+                break;
+            case "exe":
+                mimeType = "application/octet-stream";
+                break;
+            // Add more cases for other file types as needed
+            default:
+                // Set a default MIME type if file type is unknown
+                mimeType = "application/octet-stream";
+                break;
+        }
+        return mimeType;
+    }
+
     @AuraEnabled
     public static String  UploadFile(String fileName, String fileType, String docid ,String recordId) {
          String fileId = '';
@@ -33,8 +58,9 @@ public class integration2 {
         String close_delim = '\r\n--' + boundary + '--';
         String bodyEncoded = EncodingUtil.base64Encode(myBlob);
         String encodedFileName = EncodingUtil.urlEncode(fileName, 'UTF-8');
-        
-        String body = delimiter + 'Content-Type: application/json\r\n\r\n' + '{"name" : "' + encodedFileName + '", ' + ' "parents": ["'+ foldeId +'"], ' + ' "mimeType" : "image/' + fileType + '"}' + delimiter + 'Content-Type: image/' + fileType + '\r\n' + 'Content-Transfer-Encoding: base64\r\n' + '\r\n' + bodyEncoded + close_delim;
+        String body = delimiter + 'Content-Type: application/json\r\n\r\n' + '{"name" : "' + encodedFileName + '", ' + ' "parents": ["'+ foldeId +'"], ' + ' "mimeType" : ' + getMimeType(fileType) + '}' + delimiter + 'Content-Type:' + getMimeType(fileType) + '\r\n' + 'Content-Transfer-Encoding: base64\r\n' + '\r\n' + bodyEncoded + close_delim;
+
+        // String body = delimiter + 'Content-Type: application/json\r\n\r\n' + '{"name" : "' + encodedFileName + '", ' + ' "parents": ["'+ foldeId +'"], ' + ' "mimeType" : "image/' + fileType + '"}' + delimiter + 'Content-Type: image/' + fileType + '\r\n' + 'Content-Transfer-Encoding: base64\r\n' + '\r\n' + bodyEncoded + close_delim;
         Http http = new Http();
         HttpRequest req = new HttpRequest();
         req.setEndpoint('callout:Google_Drive/upload/drive/v3/files?uploadType=multipart');

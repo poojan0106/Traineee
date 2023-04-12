@@ -16,7 +16,7 @@ export default class integrationTask2 extends LightningElement {
     @track dltfile;
     @track folderId;
     get acceptedFormats() {
-        return ['.pdf', '.png', '.jpg'];
+        return ['.jpeg' , '.png', '.jpg'];
     }
         handleUploadFinished(event) {
         this.connectedCallback();

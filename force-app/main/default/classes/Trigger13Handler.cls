@@ -7,7 +7,7 @@ public class Trigger13Handler {
                 Eve.WhoId  =con.Id	;
                 Eve.Subject = 'New Contact Created';
                 Eve.EndDateTime = DateTime.now().addHours(1);
-                Eve.Description = 'A new contact has been created: ';
+                Eve.Description = 'A new contact has been created:';
                 Eve.StartDateTime = DateTime.now();
             event.add(Eve);
         }

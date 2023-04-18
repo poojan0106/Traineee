@@ -22,4 +22,6 @@ public class WizardTask {
             }
             return 'record successfully insert';  
         }
+
+        
 }

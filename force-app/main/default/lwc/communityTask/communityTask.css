@@ -1,0 +1,11 @@
+.registration-container {
+    width: 50%;
+    margin: auto;
+    background-size: cover;
+    background-position: center;
+}
+
+.login-form,
+.registration-form {
+    margin-top: 1rem;
+}

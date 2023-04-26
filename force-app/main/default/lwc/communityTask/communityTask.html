@@ -13,6 +13,12 @@
                             <div class="slds-m-top_medium">
                                 <a onclick={handleForgotPasswordClick} class="slds-text-link">Forgot Password?</a>
                             </div>
+                            <template if:true={showForgotPassword}>
+                                <lightning-input label="User Name" type="email" value={userName} onchange={handleUserEmailChange}></lightning-input>
+                                <div class="slds-m-top_medium">
+                                    <lightning-button label="Submit" variant="brand" onclick={handleForgotPasswordSubmit} disabled={isSubmitDisabled} ></lightning-button>
+                                </div>
+                            </template>
                         </div>
                     </lightning-card>
                 </div>
@@ -27,7 +33,8 @@
                                     <lightning-input label=" Year Of Experience" value={teacherExperience} onchange={handleTeacherExperienceChange}></lightning-input>
                                 </template>
                                 <template if:true={isStudent}>
-                                    <lightning-input label="Last Year Marks" value={studentGrade} onchange={handleStudentGradeChange}></lightning-input>
+                                    <!-- <lightning-input label="Last Year Marks" value={studentGrade} onchange={handleStudentGradeChange}></lightning-input> -->
+                                    <lightning-combobox label="Select Teacher" value={tName} options={tcherNames} onchange={handleTeacherChange}></lightning-combobox>
                                     <lightning-input label="School Name" value={studentSchool} onchange={handleStudentSchoolChange}></lightning-input>
                                 </template>
                                 <lightning-input label="User Name"  type="email" value={name} onchange={handleNameChange}></lightning-input>
@@ -48,8 +55,3 @@
         </lightning-tabset>
     </div>
 </template>
-
-
- 
-
-

@@ -1,0 +1,15 @@
+<template>
+    <div class="login-container">
+        <div class="login-form">
+            <lightning-card title="Login" class="slds-m-around_medium">
+                <div class="slds-p-horizontal_medium">
+                    <lightning-input label="Email" type="email" value={loginEmail} onchange={handleLoginEmailChange}></lightning-input>
+                    <lightning-input label="Password" type="password" value={loginPassword} onchange={handleLoginPasswordChange}></lightning-input>
+                    <div class="slds-m-top_medium">
+                        <lightning-button label="Login" variant="brand" onclick={handleLogin}></lightning-button>
+                    </div>
+                </div>
+            </lightning-card>
+        </div>
+    </div>
+</template>

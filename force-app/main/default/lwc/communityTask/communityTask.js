@@ -14,6 +14,7 @@ export default class communityTask extends LightningElement {
     @track tName = '';
     @track studentSchool = '';
     @track name = '';
+    @track studentStd = '';
     @track email = '';
     @track password = '';
     @track loginName = '';
@@ -62,6 +63,9 @@ export default class communityTask extends LightningElement {
     handleTeacherSubjectChange(event) {
         this.teacherSubject = event.target.value;
     }
+    handleStudentStdChange(event) {
+        this.StudentStd = event.target.value;
+    }
 
     handleTeacherExperienceChange(event) {
         this.teacherExperience = event.target.value;
@@ -107,7 +111,7 @@ export default class communityTask extends LightningElement {
 
     // Call Apex method to create contact
     createContact() {
-        createContact({ Role: this.Role,Subject: this.teacherSubject,Experience: this.teacherExperience,Name: this.name,Email: this.email, password: this.password, teacherName: this.tName ,studentSchool: this.studentSchool })
+        createContact({ Role: this.Role, Standard  : this.StudentStd ,Subject: this.teacherSubject,Experience: this.teacherExperience,Name: this.name,Email: this.email, password: this.password, teacherName: this.tName ,studentSchool: this.studentSchool })
             .then(result => {
                 console.log("executed", result);
                 this.activeTabValue = 'login';
@@ -130,6 +134,7 @@ export default class communityTask extends LightningElement {
         this.tName = '';
         this.studentSchool = '';
         this.name = '';
+        this.StudentStd = '';
         this.email = '';
         this.password = '';
         this.loginName = '';

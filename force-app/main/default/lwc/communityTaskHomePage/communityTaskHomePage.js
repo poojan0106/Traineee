@@ -55,4 +55,26 @@ export default class communnityTaskHomePage extends NavigationMixin(LightningEle
             }
         });
     }
+
+    navigateToHelp() {
+        console.log('i am nevigatee to help');
+        // Replace "myprofile" with the URL of your My Profile page
+        this[NavigationMixin.Navigate]({
+            type: 'standard__webPage',
+            attributes: {
+                url: '/communityHelp'
+            }
+        });
+    }
+
+    navigateToContactUs() {
+        console.log('i am nevigatee to Contact Us');
+        // Replace "myprofile" with the URL of your My Profile page
+        this[NavigationMixin.Navigate]({
+            type: 'standard__webPage',
+            attributes: {
+                url: '/ContactUs'
+            }
+        });
+    }
 }

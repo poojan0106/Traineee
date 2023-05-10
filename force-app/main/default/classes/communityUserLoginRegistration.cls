@@ -1,6 +1,6 @@
 public without sharing class communityUserLoginRegistration {
         @AuraEnabled
-        public static void createContact( String Role, String Subject, String Experience,String teacherName,String studentSchool,  String Name, String Email, String password) {
+        public static void createContact( String Role, String Standard, String Subject, String Experience,String teacherName,String studentSchool,  String Name, String Email, String password) {
             System.debug(Role);
             System.debug(Subject);
             System.debug(Experience);
@@ -9,7 +9,8 @@ public without sharing class communityUserLoginRegistration {
             System.debug(Name);
             System.debug(Email);
             System.debug(password);
-
+            System.debug(Standard);
+            
             Contact newContact = new Contact();
 
             newContact.LastName = Name;
@@ -19,6 +20,7 @@ public without sharing class communityUserLoginRegistration {
             newContact.Role__c = teacherName;
             newContact.school_name__c = studentSchool;
             newContact.Role__c	 = Role;
+            newContact.Sem__c	 = Standard;
             newContact.Password__c = password;
             newContact.AccountId = '0012w00001I4MJNAA3';
 
@@ -151,6 +153,11 @@ public without sharing class communityUserLoginRegistration {
         return [SELECT Id, Name ,Email ,Role__c,teacherName__r.Name FROM Contact WHERE teacherName__r.Name =:teacherName AND teacherName__r.Name != NULL ORDER BY Name DESC ];
         }
         @AuraEnabled(cacheable=true)
+        public static List<Contact> fetchCon(String Name){
+            System.debug(Name);
+        return [SELECT Id, Name ,Email ,Role__c,Sem__c FROM Contact WHERE LastName =:Name AND Name != NULL ORDER BY Name DESC ];
+        }
+        @AuraEnabled(cacheable=true)
         public static List<Contact> fetchTeach(String teacherName){
             System.debug(teacherName);
         return [SELECT Id, Name ,Email ,Role__c FROM Contact WHERE Name =:teacherName AND Name != NULL ORDER BY Name DESC ];
@@ -162,7 +169,19 @@ public without sharing class communityUserLoginRegistration {
             System.debug(StdntName);
             System.debug(StdntId);
             System.debug(TcherName);
-            
+
+            List<Feedback__c> listName = [SELECT Name FROM Feedback__c WHERE Name =:StdntName LIMIT 1];
+            if (listName.size()>0) {
+            Feedback__c s = new Feedback__c();
+            s.Id = listName[0].Id;
+            s.Name = StdntName;
+            s.Student_Id__c = StdntId;
+            s.Emoji_rating__c = Rating; 
+            s.Comments__c = Comments; 
+            s.teacherName__c = TcherName; 
+            update s;
+            return 'feedback updated sucessfully.';
+            }else{
             Feedback__c s = new Feedback__c();
             s.Name = StdntName;
             s.Student_Id__c = StdntId;
@@ -170,6 +189,18 @@ public without sharing class communityUserLoginRegistration {
             s.Comments__c = Comments; 
             s.teacherName__c = TcherName; 
             insert s;
-            return 'feedback created sucessfully ';
+            return 'feedback created sucessfully. ';
+            }
         }
+
+        //------Aura------
+    @AuraEnabled 
+    public static String fetchStudent(){
+        String Name = UserInfo.getName();
+        string Email = UserInfo.getUserEmail();
+       Contact c = [SELECT id,Name ,Email,Role__c ,teacherName__r.Email FROM Contact WHERE Name =: Name AND Email=:Email];
+       String a = c.teacherName__r.Email;
+       System.debug(a);
+        return a;
+    }
 }

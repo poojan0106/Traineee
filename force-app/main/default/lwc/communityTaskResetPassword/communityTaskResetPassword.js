@@ -4,6 +4,7 @@ import resetPassword from '@salesforce/apex/communityUserLoginRegistration.reset
 import updateContact from '@salesforce/apex/communityUserLoginRegistration.updateContact';
 import updateUser from '@salesforce/apex/communityUserLoginRegistration.updateUser';
 import fetchCont from '@salesforce/apex/communityUserLoginRegistration.fetchCont';
+import fetchCon from '@salesforce/apex/communityUserLoginRegistration.fetchCon';
 import fetchTeach from '@salesforce/apex/communityUserLoginRegistration.fetchTeach';
 import feedbackRec from '@salesforce/apex/communityUserLoginRegistration.feedbackRec';
 import { getRecord } from 'lightning/uiRecordApi';
@@ -29,12 +30,15 @@ export default class communityTaskResetPassword extends NavigationMixin(Lightnin
     @track isdisable = true;
     @track iscancle = true;
     @track isRoleTeacher = false;
+    @track isRoleStudent = false;
     firstName;
     lastName;
     @track userName;
     email;
     studentCol = studntCol;
+    // subjectCol = subCol;
     @track studentData = [];
+    // @track subjecttData = [];
     @track Email = '';
     @track Name = '';
     @api selectedRows = [];
@@ -43,9 +47,11 @@ export default class communityTaskResetPassword extends NavigationMixin(Lightnin
     @api Rating;
     @api Comments = '';
     @track Comment = '';
-
     @track isShowModal = false;
-   
+    @api semester;
+    @track isSem6 ;
+    @track isSem7 ;
+    @track isSem8 ;
 
     // SelectionValues = [
     //     { label: 'Emoji5', value: '' },
@@ -88,7 +94,7 @@ export default class communityTaskResetPassword extends NavigationMixin(Lightnin
     feedbackRec() {
         feedbackRec({ Rating: this.Rating , Comments: this.Comments , StdntName: this.selectedRows[0].Name , StdntId: this.selectedRows[0].Id , TcherName: this.selectedRows[0].teacherName__r.Name })
             .then(result => {
-                console.log("feedback sent sucessfully", result);
+                console.log("Result", result);
             })
             .catch(error => {
                 console.log(JSON.stringify(error));
@@ -209,12 +215,40 @@ export default class communityTaskResetPassword extends NavigationMixin(Lightnin
         }
     }
 
+    @wire(fetchCon, { Name: '$userName' })
+    wirefetchCon({ error, data }) {
+        if (data) {
+            this.semester = data[0].Sem__c;
+            console.log("sem-->" , this.semester);
+
+            if (this.semester == '6') {
+                this.isSem6 = true;
+                this.isSem7 = false;
+                this.isSem8 = false; 
+            }else if (this.semester == '7') {
+                this.isSem6 = false;
+                this.isSem7 = true;
+                this.isSem8 = false; 
+            }else if (this.semester == '8') {
+                this.isSem6 = false;
+                this.isSem7 = false;
+                this.isSem8 = true; 
+            }else{
+                this.isSem6 = false;
+                this.isSem7 = false;
+                this.isSem8 = false; 
+            }
+        } else if (error) {
+            console.log(error);
+        }
+    }
+
     @wire(fetchTeach ,{teacherName :'$userName'})
     wiredfetchTeach({ error, data }) {
         if(data) {
             let tempRc = [];
             
-            console.log( 'Fetched Teacher Data - ' + JSON.stringify( data ) );
+            console.log( 'Fetched Data - ' + JSON.stringify( data ) );
             data.forEach( ( record ) => {
                 let temp = Object.assign( {}, record );  
                 if ( temp.ContactId) {
@@ -226,11 +260,13 @@ export default class communityTaskResetPassword extends NavigationMixin(Lightnin
                 tempRc.push( temp ); 
             });
             this.teacherData = tempRc;
-            console.log("hello world teacherData==" ,JSON.stringify(this.teacherData[0].Role__c));
+            console.log("Role__C Data==" ,JSON.stringify(this.teacherData[0].Role__c));
             if (this.teacherData[0].Role__c == 'Teacher') {
                 this.isRoleTeacher = true;
+                this.isRoleStudent = false;
             }else{
                 this.isRoleTeacher = false;
+                this.isRoleStudent = true ;
             }
             this.error = undefined;
         } else if ( error ) {

@@ -47,6 +47,10 @@
     <types>
         <members>*</members>
         <name>LightningMessageChannel</name>
+    </types>  
+    <types>
+        <members>*</members>
+        <name>ApexTrigger</name>
     </types>
     <version>56</version>
 </Package>

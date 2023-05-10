@@ -1,0 +1,20 @@
+<template>
+    <lightning-card title="Account creation form">
+    <div class="slds-text-align_center">
+        <lightning-input type="text" label="Last Name :" value={LastName} onchange={handleLastName}
+        ></lightning-input>
+        <lightning-input type="number" label="Contact Count :" value={contactCount} onchange={handleContactCount} max="100" min="0"
+        ></lightning-input><br />
+    </div>
+    <c-interview-child onpass={fetchId} last-name={LaastName} contact-count={coontactCount}></c-interview-child>
+    <br/>
+    </lightning-card>
+    <lightning-card >
+    <div style="height: 200px;">
+    
+        <lightning-input type="text" label="Account Id" value={AccId} disabled></lightning-input><br/>
+        <lightning-datatable key-field="conId" data={conData} columns={conCol}>
+        </lightning-datatable>
+    </div></lightning-card>
+
+</template>

@@ -1,0 +1,22 @@
+
+<template>
+    <!-- This Modal will only be visible if showModal is set to true -->
+    <template if:true={showModal}>
+        <section aria-modal="true" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container ">
+                <div class="slds-modal__content" style="border-radius: 4px;">
+                    
+                    <div class="slds-p-around_medium slds-modal__content_headless" style="background-color: #77591b87;">
+                       <center><img src={image}/></center> 
+                        <p style="text-align: center;font-size: 39px; font-family: fantasy; ">Welcome to the community world.</p>
+                        <div class="slds-text-align_center">
+                        <button class="button1" onclick={closeModal}>Close</button></div>
+                    </div>
+                </div>
+                
+                    
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

@@ -1,22 +1,28 @@
 <template>
-    <div class="registration-container" >
+    <div class="registration-container">
         <lightning-tabset variant="default" active-tab-value={activeTabValue}>
             <lightning-tab class="" label="Login" value="login">
                 <div class="login-form">
                     <lightning-card title="Login Form" class="slds-m-around_medium">
                         <div class="slds-p-horizontal_medium">
-                            <lightning-input label="User Name" type="email" value={loginName} onchange={handleLoginEmailChange}></lightning-input>
-                            <lightning-input label="Password" type="password" value={loginPassword} onchange={handleLoginPasswordChange}></lightning-input>
+                            <lightning-input label="User Name" type="email" value={loginName}
+                                onchange={handleLoginEmailChange}></lightning-input>
+                            <lightning-input label="Password" type="password" value={loginPassword}
+                                onchange={handleLoginPasswordChange}></lightning-input>
                             <div class="slds-m-top_medium">
-                                <lightning-button label="Login" variant="brand" onclick={handleLogin}></lightning-button>
+                                <lightning-button label="Login" variant="brand"
+                                    onclick={handleLogin}></lightning-button>
                             </div>
                             <div class="slds-m-top_medium">
                                 <a onclick={handleForgotPasswordClick} class="slds-text-link">Forgot Password?</a>
                             </div>
                             <template if:true={showForgotPassword}>
-                                <lightning-input label="User Name" type="email" value={userName} onchange={handleUserEmailChange}></lightning-input>
+                                <lightning-input label="User Name" type="email" value={userName}
+                                    onchange={handleUserEmailChange}></lightning-input>
                                 <div class="slds-m-top_medium">
-                                    <lightning-button label="Submit" variant="brand" onclick={handleForgotPasswordSubmit} disabled={isSubmitDisabled} ></lightning-button>
+                                    <lightning-button label="Submit" variant="brand"
+                                        onclick={handleForgotPasswordSubmit}
+                                        disabled={isSubmitDisabled}></lightning-button>
                                 </div>
                             </template>
                         </div>
@@ -29,25 +35,36 @@
                         <div class="slds-p-horizontal_medium">
                             <template if:true={isRoleSelected}>
                                 <template if:true={isTeacher}>
-                                    <lightning-input label="Subject" value={teacherSubject} onchange={handleTeacherSubjectChange}></lightning-input>
-                                    <lightning-input label=" Year Of Experience" value={teacherExperience} onchange={handleTeacherExperienceChange}></lightning-input>
+                                    <lightning-input label="Subject" value={teacherSubject}
+                                        onchange={handleTeacherSubjectChange}></lightning-input>
+                                    <lightning-input label=" Year Of Experience" value={teacherExperience}
+                                        onchange={handleTeacherExperienceChange}></lightning-input>
                                 </template>
                                 <template if:true={isStudent}>
                                     <!-- <lightning-input label="Last Year Marks" value={studentGrade} onchange={handleStudentGradeChange}></lightning-input> -->
-                                    <lightning-combobox label="Select Teacher" value={tName} options={tcherNames} onchange={handleTeacherChange}></lightning-combobox>
-                                    <lightning-input label="School Name" value={studentSchool} onchange={handleStudentSchoolChange}></lightning-input>
-                                    <lightning-input label="Standard" placeholder="7"  value={studentStd} onchange={handleStudentStdChange}></lightning-input>
+                                    <lightning-combobox label="Select Teacher" value={tName} options={tcherNames}
+                                        onchange={handleTeacherChange}></lightning-combobox>
+                                    <lightning-input label="School Name" value={studentSchool}
+                                        onchange={handleStudentSchoolChange}></lightning-input>
+                                    <lightning-input label="Standard" placeholder="7" value={studentStd}
+                                        onchange={handleStudentStdChange}></lightning-input>
                                 </template>
-                                <lightning-input label="User Name"  type="email" value={name} onchange={handleNameChange}></lightning-input>
-                                <lightning-input label="Email" type="email" value={email} onchange={handleEmailChange}></lightning-input>
-                                <lightning-input label="Password" type="password" value={password} onchange={handlePasswordChange}></lightning-input>
+                                <lightning-input label="User Name" type="email" value={name}
+                                    onchange={handleNameChange}></lightning-input>
+                                <lightning-input label="Email" type="email" value={email}
+                                    onchange={handleEmailChange}></lightning-input>
+                                <lightning-input label="Password" type="password" value={password}
+                                    onchange={handlePasswordChange}></lightning-input>
                                 <div class="slds-m-top_medium">
-                                    <lightning-button label="Register" variant="brand" onclick={handleRegister}></lightning-button>&nbsp;
-                                    <lightning-button label="Cancel" variant="neutral" onclick={handleCancel}></lightning-button>
+                                    <lightning-button label="Register" variant="brand"
+                                        onclick={handleRegister}></lightning-button>&nbsp;
+                                    <lightning-button label="Cancel" variant="neutral"
+                                        onclick={handleCancel}></lightning-button>
                                 </div>
                             </template>
                             <template if:false={isRoleSelected}>
-                                <lightning-radio-group label="Select Role" options={roleOptions} value={selectedRole} onchange={handleRoleChange}></lightning-radio-group>
+                                <lightning-radio-group label="Select Role" options={roleOptions} value={selectedRole}
+                                    onchange={handleRoleChange}></lightning-radio-group>
                             </template>
                         </div>
                     </lightning-card>

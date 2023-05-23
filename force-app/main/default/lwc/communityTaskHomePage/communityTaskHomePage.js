@@ -28,11 +28,11 @@ export default class communnityTaskHomePage extends NavigationMixin(LightningEle
                 attributes: {
                     url: '/home'
                 }
-            }); 
+            });
         } catch (error) {
-            console.log('error' , error);
+            console.log('error', error);
         }
-     
+
     }
 
     navigateToMyProfile() {

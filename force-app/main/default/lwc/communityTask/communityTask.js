@@ -1,4 +1,4 @@
-import { LightningElement, api, track , wire } from 'lwc';
+import { LightningElement, api, track, wire } from 'lwc';
 import createContact from '@salesforce/apex/communityUserLoginRegistration.createContact';
 import authenticateUser from '@salesforce/apex/communityUserLoginRegistration.authenticateUser';
 import forgotPasswordUser from '@salesforce/apex/communityUserLoginRegistration.forgotPasswordUser';
@@ -22,7 +22,7 @@ export default class communityTask extends LightningElement {
     @track loginPassword = '';
     @track redirectToLoginPage = false;
     @track activeTabValue = 'login';
-    @track showForgotPassword = false; 
+    @track showForgotPassword = false;
     @track isSubmitDisabled = false;
     tcherNames = [];
 
@@ -46,18 +46,18 @@ export default class communityTask extends LightningElement {
     @wire(getTeacherNames)
     wiredContacts({ error, data }) {
         if (data) {
-            console.log("data" , JSON.stringify(data));
+            console.log("data", JSON.stringify(data));
             this.tcherNames = data.map(contact => ({ label: contact.Name, value: contact.Name }));
         } else if (error) {
 
-            console.error("err" , JSON>stringify (error));
+            console.error("err", JSON > stringify(error));
         }
     }
 
     handleTeacherChange(event) {
         this.tName = event.target.value;
         // Do something with the selected teacher ID
-        console.log("name" , this.tName);
+        console.log("name", this.tName);
     }
     // Handlers for input field changes
     handleTeacherSubjectChange(event) {
@@ -111,7 +111,7 @@ export default class communityTask extends LightningElement {
 
     // Call Apex method to create contact
     createContact() {
-        createContact({ Role: this.Role, Standard  : this.StudentStd ,Subject: this.teacherSubject,Experience: this.teacherExperience,Name: this.name,Email: this.email, password: this.password, teacherName: this.tName ,studentSchool: this.studentSchool })
+        createContact({ Role: this.Role, Standard: this.StudentStd, Subject: this.teacherSubject, Experience: this.teacherExperience, Name: this.name, Email: this.email, password: this.password, teacherName: this.tName, studentSchool: this.studentSchool })
             .then(result => {
                 console.log("executed", result);
                 this.activeTabValue = 'login';
@@ -146,16 +146,16 @@ export default class communityTask extends LightningElement {
         console.log("I Am Redirected To Login Page....");
         // Perform login logic here
         // You can access the input field values using this.loginEmail and this.loginPassword
-        
+
         // Example: You can call an Apex method to authenticate the user
         authenticateUser({ userName: this.loginName, password: this.loginPassword })
-        .then(result => {
-            if (result) {
-                window.location.href = result;
-            } 
-        }).catch(error => {
-            console.error(error);
-        });
+            .then(result => {
+                if (result) {
+                    window.location.href = result;
+                }
+            }).catch(error => {
+                console.error(error);
+            });
     }
 
     // Handler for Tab change
@@ -166,22 +166,22 @@ export default class communityTask extends LightningElement {
     handleForgotPasswordClick() {
         this.showForgotPassword = true;
     }
-    handleForgotPasswordSubmit(){   
+    handleForgotPasswordSubmit() {
         this.isSubmitDisabled = true;
-        if(this.userName.length != 0){
-        forgotPasswordUser({ userName: this.userName})
-        .then(result => {
-            // Set the URL received from Apex to the property
-            alert(result);
-        })
-        .catch(error => {
-            // Handle any errors from Apex call
-        alert(error);
-        });
-    }else{
-        alert('user name field must not be blank');
-        this.isSubmitDisabled = false;
-    }
+        if (this.userName.length != 0) {
+            forgotPasswordUser({ userName: this.userName })
+                .then(result => {
+                    // Set the URL received from Apex to the property
+                    alert(result);
+                })
+                .catch(error => {
+                    // Handle any errors from Apex call
+                    alert(error);
+                });
+        } else {
+            alert('user name field must not be blank');
+            this.isSubmitDisabled = false;
+        }
     }
 
 }

@@ -1,4 +1,5 @@
 public without sharing class communityUserLoginRegistration {
+    //--------------------------------for registration of user-------------------------------------
         @AuraEnabled
         public static void createContact( String Role, String Standard, String Subject, String Experience,String teacherName,String studentSchool,  String Name, String Email, String password) {
             System.debug(Role);
@@ -62,6 +63,8 @@ public without sharing class communityUserLoginRegistration {
             newUser.IsActive = true;
             insert newUser;
         }
+
+    //-----------------for update user information-------------------------------
         @AuraEnabled
         public static String updateContact(String Name, String Email ,String oldName , String oldEmail) {
         
@@ -108,6 +111,8 @@ public without sharing class communityUserLoginRegistration {
             update u;
             return 'user updated sucessfully ';
         }
+
+        //-----------------------------for user login authentication--------------------------
         @AuraEnabled
         public static String authenticateUser( String userName,String password) {
             System.debug(userName);
@@ -116,6 +121,8 @@ public without sharing class communityUserLoginRegistration {
             System.debug(pageRef);
             return pageRef.getUrl();
         }
+
+        //----------------------------for forgot password page---------------------------------
         @AuraEnabled
         public static String forgotPasswordUser(String userName) {
             System.debug(userName);
@@ -132,6 +139,8 @@ public without sharing class communityUserLoginRegistration {
                 return 'Failed to send password reset email. Please check your username and try again.';
             }
         }
+
+        //-----------------------------for reset password page ---------------------------------------
         @AuraEnabled
         public static String resetPassword(String currentPassword, String newPassword , String verifyNewPassword ) {
             String n = newPassword;
@@ -143,25 +152,37 @@ public without sharing class communityUserLoginRegistration {
             PageReference pageR = Site.changePassword(n, vnp, c);
             return 'hello' ;
         }   
+
+        //-----------------------------------for registration page to get names of teacher-----------------------------------       
         @AuraEnabled(cacheable=true)
         public static List<Contact> getTeacherNames() {
             return [SELECT Name FROM Contact WHERE Role__c = 'Teacher'];
         }
+
+        //------------------------------------for teacher profile page to show student details--------------------------------------------
         @AuraEnabled(cacheable=true)
         public static List<Contact> fetchCont(String teacherName){
             System.debug(teacherName);
         return [SELECT Id, Name ,Email ,Role__c,teacherName__r.Name FROM Contact WHERE teacherName__r.Name =:teacherName AND teacherName__r.Name != NULL ORDER BY Name DESC ];
         }
+
+
+        // -----------------------for student profile to show semester detail with subjects-----------------------
         @AuraEnabled(cacheable=true)
         public static List<Contact> fetchCon(String Name){
             System.debug(Name);
         return [SELECT Id, Name ,Email ,Role__c,Sem__c FROM Contact WHERE LastName =:Name AND Name != NULL ORDER BY Name DESC ];
         }
+
+
+        //----------------------------for get the user is teacher or student-------------------------------- 
         @AuraEnabled(cacheable=true)
         public static List<Contact> fetchTeach(String teacherName){
             System.debug(teacherName);
         return [SELECT Id, Name ,Email ,Role__c FROM Contact WHERE Name =:teacherName AND Name != NULL ORDER BY Name DESC ];
         }
+
+        //------------------------------for feedback page----------------------------------------------
         @AuraEnabled
         public static String feedbackRec( String Rating , String  Comments , String StdntName , String StdntId, String TcherName) {
             System.debug(Rating);
@@ -193,7 +214,7 @@ public without sharing class communityUserLoginRegistration {
             }
         }
 
-        //------Aura------
+        //--------------------------for contact us page-----------------------------------
     @AuraEnabled 
     public static String fetchStudent(){
         String Name = UserInfo.getName();

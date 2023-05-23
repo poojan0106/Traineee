@@ -6,6 +6,7 @@ var state = response.getState();
 if (state === "SUCCESS") {
 component.set("v.accData1", response.getReturnValue());
 }
+
 });
 $A.enqueueAction(action);
 },

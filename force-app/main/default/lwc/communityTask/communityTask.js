@@ -185,5 +185,3 @@ export default class communityTask extends LightningElement {
     }
 
 }
-
-

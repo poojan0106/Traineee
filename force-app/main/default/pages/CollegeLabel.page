@@ -1,9 +1,36 @@
-<apex:page >
-       <apex:pageBlock >  
-           <apex:pageBlockSection >    
-             <apex:outputText >
-              <h1 style="color:Red; font-size:15px;"> {!$Label.CollegeLabel}</h1>
-            </apex:outputText>
-</apex:pageBlockSection>      
- </apex:pageBlock>
+<apex:page showheader="false" sidebar="false">
+       <apex:form style="border-radius:5px; background-image: url('https://wallpaperaccess.com/full/6293694.jpg'); background-repeat: no-repeat; height:100%; width:100%;">
+       <style>
+       .a1 {
+               text-align:center;
+               color:#a41c1cb5;
+               font-size:16px;
+               dispaly:flex;
+               align-items:center;
+               justify-content:center;
+               margin-top:5px;
+               padding-top:5px;
+               padding-right:5px;
+               padding-left:5px;
+           }
+           .a22 {
+               color:black;
+               font-size:14px;
+               margin-top:5px;
+               padding-top:5px;
+               padding-right:5px;
+               padding-left:5px;
+           }
+       </style>
+            <apex:outputText escape="false" >
+            <div class="a1">
+              <h1> {!$Label.CollegeLabel}</h1><br/><br/>
+              <h3 style="color:black;"> {!$Label.Community_Information} </h3><br/><br/>
+              </div>
+              </apex:outputText>
+              <div class="a22">
+              <apex:outputText value="{!$Label.Comm_Info_And_QA}" escape="false"/><br/>
+              <apex:outputText value="{!$Label.comm_QA}" escape="false"/> 
+            </div>
+       </apex:form>
 </apex:page>

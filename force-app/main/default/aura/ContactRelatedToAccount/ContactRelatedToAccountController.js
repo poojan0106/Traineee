@@ -35,6 +35,28 @@
         $A.enqueueAction(action);
      
     },
+    Call: function(component, event, helper) {
+       var workspaceAPI = component.find("workspace");
+        var componentName = '/Redirect1?id=' + component.get("v.recordId"); // Replace with the actual name of your component
+        var subtab = {
+            type: "standard__webpage",
+            attributes: {
+                url:componentName 
+            },
+            state: {} // You can pass any state parameters here if needed
+        };
+        workspaceAPI.getFocusedTabInfo().then(function(response) {
+            var focusedTabId = response.tabId;
+            return workspaceAPI.openSubtab({
+                parentTabId: focusedTabId,
+                pageReference: subtab,
+                focus: true
+            });
+        }).catch(function(error) {
+            console.log(error);
+        });
+    },
+
     OnSelectChange: function(component, event, helper) {
     var selected = parseInt(component.find("records").get("v.value"));
     var paginationList = [];

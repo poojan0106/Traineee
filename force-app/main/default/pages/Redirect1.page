@@ -1,0 +1,21 @@
+<apex:page >
+
+    <!-- Include Lightning App -->
+    <apex:includeLightning />
+    <div id="auraContainer"></div>
+<apex:includeScript value="/lightning/lightning.out.js" />
+    <div id="lightning" />
+    <script>
+        $Lightning.use("c:newAura1", function() {
+            // Create an instance of the Aura component and render it in the specified container
+            $Lightning.createComponent("c:ContactRelatedToAccount",
+                {},
+                "auraContainer",
+                function(component) {
+                    // Component is created and rendered
+                }
+            );
+        });
+    </script>
+
+</apex:page>

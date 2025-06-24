@@ -1,0 +1,35 @@
+<template>
+    <lightning-card title="Salesforce Webinar Registration">
+        <div class="slds-p-around_medium">
+            <lightning-textarea
+                label="Recipient Emails (comma-separated)"
+                value={emails}
+                onchange={handleEmailChange}
+                placeholder="example1@email.com, example2@email.com">
+            </lightning-textarea>
+
+            <div class="slds-m-top_medium">
+                <lightning-button
+                    label="Send .ICS Email Invite"
+                    onclick={sendInvite}
+                    variant="brand">
+                </lightning-button>
+            </div>
+
+            <div class="slds-m-top_medium">
+                <lightning-button
+                    label="Add to Google Calendar"
+                    onclick={openGoogleCalendar}
+                    variant="neutral">
+                </lightning-button>
+            </div>
+
+            <template if:true={success}>
+                <p class="slds-text-color_success slds-m-top_medium">Invite sent successfully!</p>
+            </template>
+            <template if:true={error}>
+                <p class="slds-text-color_error slds-m-top_medium">Error: {error}</p>
+            </template>
+        </div>
+    </lightning-card>
+</template>

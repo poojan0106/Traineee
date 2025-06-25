@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <lightning-card title="Salesforce Webinar Registration">
         <div class="slds-p-around_medium">
             <lightning-textarea
@@ -32,4 +32,59 @@
             </template>
         </div>
     </lightning-card>
+</template> -->
+
+
+<!-- <template>
+    <lightning-card title="Send Calendar Invite">
+        <div class="slds-p-around_medium">
+            <lightning-textarea
+                label="Recipient Emails (comma-separated)"
+                value={emails}
+                onchange={handleEmailChange}
+                placeholder="example1@email.com, example2@email.com">
+            </lightning-textarea>
+
+            <lightning-button
+                label="Send Calendar Invite"
+                onclick={sendInvite}
+                variant="brand"
+                class="slds-m-top_medium">
+            </lightning-button>
+
+            <template if:true={success}>
+                <p class="slds-text-color_success slds-m-top_medium">Invite sent successfully!</p>
+            </template>
+            <template if:true={error}>
+                <p class="slds-text-color_error slds-m-top_medium">Error: {error}</p>
+            </template>
+        </div>
+    </lightning-card>
+</template> -->
+
+<template>
+  <lightning-card title="Send Calendar Invite">
+    <div class="slds-p-around_medium">
+      <lightning-textarea
+        label="Email Addresses (comma-separated)"
+        value={emails}
+        onchange={handleEmailChange}>
+      </lightning-textarea>
+
+      <lightning-button
+        label="Send Invite"
+        variant="brand"
+        onclick={sendInvite}
+        class="slds-m-top_medium">
+      </lightning-button>
+
+      <template if:true={success}>
+        <p class="slds-text-color_success slds-m-top_medium">Invites sent successfully!</p>
+      </template>
+
+      <template if:true={error}>
+        <p class="slds-text-color_error slds-m-top_medium">Error: {error}</p>
+      </template>
+    </div>
+  </lightning-card>
 </template>

@@ -1,11 +1,17 @@
-declare module "@salesforce/apex/Demo3.sendCalendarInvite" {
-  export default function sendCalendarInvite(param: {emailAddresses: any, icsContent: any}): Promise<any>;
+declare module "@salesforce/apex/Demo3.sendInvite" {
+  export default function sendInvite(param: {emailAddresses: any, icsContent: any, googleLink: any}): Promise<any>;
 }
 declare module "@salesforce/apex/Demo3.fetchAcc1" {
   export default function fetchAcc1(): Promise<any>;
 }
 declare module "@salesforce/apex/Demo3.updateRecordName" {
   export default function updateRecordName(param: {recordId: any}): Promise<any>;
+}
+declare module "@salesforce/apex/Demo3.getAccountsForContact" {
+  export default function getAccountsForContact(param: {contactId: any}): Promise<any>;
+}
+declare module "@salesforce/apex/Demo3.updateSingleJunctionStatus" {
+  export default function updateSingleJunctionStatus(param: {junctionId: any}): Promise<any>;
 }
 declare module "@salesforce/apex/Demo3.fetchCon1" {
   export default function fetchCon1(param: {recordId: any}): Promise<any>;

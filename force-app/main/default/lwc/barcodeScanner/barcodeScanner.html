@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="slds-align_absolute-center slds-m-vertical_large">
     <lightning-button
       variant="brand"
@@ -9,4 +9,39 @@
     ></lightning-button>
   </div>
 
+</template> -->
+
+<template>
+    <template if:true={spinner1}>
+            <div id="spinnerId" class="slds-spinner_container">
+                <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+                    <span class="slds-assistive-text">Loading...</span>
+                    <div class="slds-spinner__dot-a"></div>
+                    <div class="slds-spinner__dot-b"></div>
+                </div>
+            </div>
+        </template>
+  <div class="slds-align_absolute-center slds-m-vertical_large">
+    <lightning-button
+      variant="brand"
+      icon-name="utility:scan"
+      label="Start Scanning"
+      onclick={startScanning}
+    ></lightning-button>
+  </div>
+
+  <template if:true={relatedCampaigns}>
+    <lightning-card title="Associated Campaigns">
+      <lightning-datatable
+        key-field="id"
+        data={relatedCampaigns}
+        columns={columns}
+        onrowaction={handleRowAction}
+        hide-checkbox-column="true"
+        aria-disabled={isComplete}
+      ></lightning-datatable>
+    </lightning-card>
+  </template>
 </template>
+
+
